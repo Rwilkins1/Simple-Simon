@@ -1,0 +1,185 @@
+<!-- TODO!
+1) Finish making the streak counter. Possibly create a new empty array that something new pushed every time you win. Then, have the streak counter read that number and funnel it in through the HTML.
+2) Add some additional styling to the Boxes. Make them stand out more. Maybe add some shadow or even a full background. Definitely make the boxes pop more in animation. That will make it less of a visual challenge to play.
+3) Reconfigure the success parameters. Make it so that you don't need to press "Enter" in order to get your results. Look at the Konami Code Solution.
+4) Make it so that clicking the start button after winning or losing brings you back to start instead of restarting the whole game.
+5) Create a "Super Challenge Mode" where something really unfair happens...like the colors change or something, and the goal is to remember position, not color. Need to tell the player that before the animation starts. 
+6) Maybe program medals for meeting certain requirements. Such as: Reaching a streak of 10 on easy, reaching a streak of 8 on normal, reaching a streak of 5 on hard, achieving impossible once, achieving impossible twice in a row, achieving impossible three times in a row-->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Simple Simon</title>
+	<link rel="stylesheet" type="text/css" href="/css/simon1.css">
+</head>
+<body>
+
+<!-- The Difficulty Selector -->
+<div id ="difficulty">
+	<p>Select a Difficulty Level, and press "Enter" when you have entered your guess</p>
+	<label><input type="radio" name="diff" id="Easy" value="Easy" checked>Easy</label>
+	<label><input type="radio" name="diff" id="Normal" value="Normal">Normal</label>
+	<label><input type="radio" name="diff" id="Hard" value="Hard">Hard</label>
+	<label><input type="radio" name="diff" id="Impossible" value="Impossible">Impossible</label>
+</div>
+
+<!-- The Win Streak Counter -->
+<div id="streak">Your Current Winning Streak Is: <div id ="score"></div></div>
+
+<!-- The Buttons Themselves -->
+<div id = "buttons">
+	<div id = "red"></div>
+	<div id = "orange"></div>
+	<div id = "green"></div>
+	<div id = "blue"></div>
+</div>
+	<div id = "start"><div id ="command">Start</div></div>
+
+<!-- JavaScript starts here -->
+<script src = "/js/jquery.js"></script>
+<script>
+(function() {
+
+	// The Overall variables that I need in the global scales
+	var correct = [];
+	var attempt = [];
+
+	// Red button
+	function red() {
+		$("#red").animate({
+			opacity: 1
+		}, 500).animate({
+			opacity: 0.5
+		}, 500);
+	};
+
+	$("#red").click(function(){
+		red();
+		attempt.push(1);
+		console.log(attempt);
+		
+	});
+
+	// Orange button
+	function orange() {
+		$("#orange").animate({
+			opacity: 1
+		}, 500).animate({
+			opacity: 0.5
+		}, 500);
+	};
+
+	$("#orange").click(function() {
+		orange();
+		attempt.push(2);
+		console.log(attempt);
+		
+	});
+
+	// Green button
+	function green() {
+		$("#green").animate({
+			opacity: 1
+		}, 500).animate({
+			opacity: 0.5
+		}, 500);
+	};
+
+	$("#green").click(function() {
+		green();
+		attempt.push(3);
+		console.log(attempt);
+		
+	});
+
+	// Blue button
+	function blue() {
+		$("#blue").animate({
+			opacity: 1
+		}, 500).animate({
+			opacity: 0.5
+		}, 500);
+	};
+
+	$("#blue").click(function() {
+		blue();
+		attempt.push(4);
+		console.log(attempt);
+		
+	});
+
+	// Starts the game
+	$("#start").click(function start() {
+		var count = 0;
+		var interval = 1000;
+		correct = [];
+		attempt = [];
+
+		// Determines the Difficulty
+		if ($("#Easy").is(':checked')) {
+			var max = 5;
+		} else if ($("#Normal").is(':checked')) {
+			var max = 7;
+		} else if ($("#Hard").is(':checked')) {
+			var max = 8;
+		} else if ($("#Impossible").is(':checked')) {
+			var max = 12;
+		} 
+
+		// Starts the animation
+		var go = setInterval(function() {
+			$("#command").html("Watch");
+			$("#start").css("background-color", "black");
+			if (count >= max) {
+				$("#command").html("Guess")
+				clearInterval(go);
+				console.log(correct);
+				gameplay();
+			} else {
+				game();
+				
+				count++
+			}
+		}, interval);
+
+	});
+
+	// Determines the Results
+	function gameplay() {
+		$(document).keyup(function(event) {
+			var chain = 0;
+			if (event.which == 13) {
+				if (attempt.join("|") == correct.join("|")) {
+					$("#start").css("background-color", "purple");
+					$("#command").html("You Win!<br>Play Again?");
+					$("#score").html(chain);
+				} else {
+					$("#start").css("background-color", "maroon");
+					$("#command").html("Try Again?");
+				}
+			};
+		});
+	};
+
+
+	// The game itself
+	function game() {
+		var random = (Math.floor(Math.random()* 4)+1);
+
+		if (random == 1) {
+			red();
+			correct.push(random);
+		} else if (random == 2) {
+			orange();
+			correct.push(random);
+		} else if (random == 3) {
+			green();
+			correct.push(random);
+		} else if (random == 4) {
+			blue();
+			correct.push(random);
+		}
+	};
+})();
+</script>
+</body>
+</html>
