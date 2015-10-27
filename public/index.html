@@ -208,38 +208,9 @@
 			gameplay();
 		}
 		if($("#Esteem").is(':checked')) {
-			var rand = (Math.floor(Math.random()* 15)+1);
-			if(rand == 1) {
-				alert("Your mother never loved you");
-			} else if(rand == 2) {
-				alert("Come on! I even let you see the colors on this one!");
-			} else if(rand == 3) {
-				alert("*Inhales with condescending fake concern through teeth*");
-			} else if(rand == 4) {
-				alert("Are you sure that was the right one?");
-			} else if(rand == 5) {
-				alert("hashtagbadatthisgame");
-			} else if(rand == 6) {
-				alert("*Shields eyes from the horror that is your answer*");
-			} else if(rand == 7) {
-				alert("Hey, I saw your friends at the movies yesterday. Oh, wait. You don't have any.");
-			} else if(rand == 8) {
-				alert("That's ok. There's a participation award, too.");
-			} else if(rand == 9) {
-				alert("You know what's sad? You'll probably have all the insults I programmed memorized before you beat this level.");
-			} else if(rand == 10) {
-				alert("*Makes a condescending low groan as you click your answer*");
-			} else if(rand == 11) {
-				alert("You must have been too busy contemplating your status as a speck of dust in the great cosmic wind to pay attention to the color pattern.");
-			} else if(rand == 12) {
-				alert("HAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHA!..............*clears throat*");
-			} else if(rand == 13) {
-				alert("You aren't worth the number of if/else statments I had to write for this.");
-			} else if(rand == 14) {
-				alert("Wrong.");
-			} else if(rand == 15) {
-				alert("You make me more nauseous than the Star Wars Prequels.");
-			}
+			var rand = (Math.floor(Math.random()* 15));
+			var insulter = ["Your mother never loved you", "Come on! I even let you see the colors on this one!", "*Inhales with condescending fake concern through teeth*", "Are you sure that was the right one?", "hashtagbadatthisgame", "*Shields eyes from the horror that is your answer*", "Hey, I saw your friends at the movies yesterday. Oh, wait. You don't have any.", "That's ok. There's a participation award, too.", "You know what's sad? You'll probably have all the insults I programmed memorized before you beat this level.", "*Makes a condescending low groan as you click your answer*", "You must have been too busy contemplating your status as a speck of dust in the great cosmic wind to pay attention to the color pattern.", "HAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHA!..............*clears throat*", "You aren't worth the array I had to write for this.", "Wrong.", "You make me more nauseous than the Star Wars Prequels."  ];
+			alert(insulter[rand]);
 		}
 	};
 
